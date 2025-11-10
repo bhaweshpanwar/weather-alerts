@@ -77,3 +77,15 @@ impl From<std::io::Error> for AppError {
         AppError::Io(err)
     }
 }
+
+impl From<lettre::transport::smtp::Error> for AppError {
+    fn from(err: lettre::transport::smtp::Error) -> Self {
+        AppError::Email(format!("SMTP error: {}", err))
+    }
+}
+
+impl From<lettre::address::AddressError> for AppError {
+    fn from(err: lettre::address::AddressError) -> Self {
+        AppError::Email(format!("Invalid email address: {}", err))
+    }
+}

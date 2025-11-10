@@ -46,14 +46,10 @@ clap = { version = "4.4", features = ["derive"] }
 uuid = { version = "1.6", features = ["v4", "serde"] }
 
 # Email Client
-lettre = { version = "0.10", features = ["smtp-transport", "tokio1_rustls"] }
+lettre = { version = "0.11", features = ["smtp-transport", "tokio1-native-tls"] }
 
 # HTTP Client for Weather API
 reqwest = { version = "0.11", features = ["json"] }
 
 # Validation
 validator = { version = "0.16", features = ["derive"] }
-
-# --- THIS SECTION SHOULD BE REMOVED ---
-# [dev-dependencies]
-# actix-web = { version = "4", features = ["test-util"] }

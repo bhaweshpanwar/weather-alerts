@@ -4,6 +4,7 @@ use lettre::transport::smtp::authentication::Credentials;
 use lettre::{Message, SmtpTransport, Transport};
 use log::info;
 
+
 #[derive(Clone)]
 pub struct EmailClient {
     smtp_transport: std::sync::Arc<SmtpTransport>,
@@ -21,11 +22,10 @@ impl EmailClient {
 
         let creds = Credentials::new(username.to_string(), password.to_string());
 
-        let transport = SmtpTransport::relay(smtp_host)
-            .map_err(|e| AppError::Email(format!("SMTP relay error: {}", e)))?
-            .port(smtp_port)
-            .credentials(creds)
-            .build();
+        let transport = SmtpTransport::relay(smtp_host)?
+        .port(smtp_port)
+        .credentials(creds)
+        .build();
 
         Ok(Self {
             // Wrap in Arc for cloning
